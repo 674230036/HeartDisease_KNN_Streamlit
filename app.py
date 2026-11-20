@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent
 FONT_REGULAR = BASE_DIR / "fonts" / "Prompt-Regular.ttf"
 FONT_BOLD = BASE_DIR / "fonts" / "Prompt-Bold.ttf"
 IMG_DIR = BASE_DIR / "img"
+PROFILE_IMG = IMG_DIR / "profile.jpg"
 DATA_PATH = BASE_DIR / "Heart3.csv"
 
 # ลงทะเบียนฟอนต์ภาษาไทยสำหรับ Matplotlib ให้แสดงผลสระ วรรณยุกต์ และข้อความไทยได้ 100% ไม่เป็นกล่องสี่เหลี่ยม (Tofu bug)
@@ -347,6 +348,26 @@ except Exception as e:
 
 # -------------------- ส่วนแถบด้านข้าง (Sidebar) --------------------
 with st.sidebar:
+    # การ์ดโปรไฟล์ Information Technology
+    if PROFILE_IMG.exists():
+        p_c1, p_c2, p_c3 = st.columns([1, 2.2, 1])
+        with p_c2:
+            st.image(str(PROFILE_IMG), width=120)
+        st.markdown("""
+        <div style="text-align: center; margin-top: -6px; margin-bottom: 12px;">
+            <div style="color: #0369a1; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                💻 Information Technology
+            </div>
+            <h3 style="margin: 2px 0 4px 0; font-size: 1.15rem; color: #0f2b48; font-weight: 700;">
+                สาขาเทคโนโลยีสารสนเทศ
+            </h3>
+            <span style="background: #e0f2fe; color: #0284c7; padding: 2px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; border: 1px solid #bae6fd;">
+                🆔 รหัสนักศึกษา: 674230036
+            </span>
+        </div>
+        """, unsafe_allow_html=True)
+        st.divider()
+
     st.markdown("""
     <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
         <span style="font-size:2rem;">🫀</span>
@@ -431,15 +452,24 @@ except Exception as e:
 # -------------------- Hero Header สำหรับทุกหน้า --------------------
 st.markdown("""
 <div class="hero-container">
-    <div class="hero-title">
-        <span>🫀 HeartCare AI</span>
-        <span style="font-size:1.1rem; font-weight:400; opacity:0.85;">| ระบบคัดกรองและประเมินความเสี่ยงโรคหัวใจ</span>
-    </div>
-    <p class="hero-subtitle">
-        ผู้ช่วยวิเคราะห์ทางการแพทย์อัจฉริยะด้วยขั้นตอนวิธี K-Nearest Neighbors (KNN) พร้อมการปรับสเกลข้อมูลแบบ StandardScaler
-    </p>
-    <div class="hero-status-pill">
-        ● ฐานข้อมูลพร้อมใช้งาน (918 รายการ) | โมเดล KNN พร้อมทำงานเต็มประสิทธิภาพ
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="flex: 1; min-width: 280px;">
+            <div class="hero-title">
+                <span>🫀 HeartCare AI</span>
+                <span style="font-size:1.1rem; font-weight:400; opacity:0.85;">| ระบบคัดกรองและประเมินความเสี่ยงโรคหัวใจ</span>
+            </div>
+            <p class="hero-subtitle">
+                ผู้ช่วยวิเคราะห์ทางการแพทย์อัจฉริยะด้วยขั้นตอนวิธี K-Nearest Neighbors (KNN) • สาขาวิชาเทคโนโลยีสารสนเทศ (Information Technology)
+            </p>
+            <div class="hero-status-pill">
+                ● ฐานข้อมูลพร้อมใช้งาน (918 รายการ) | โมเดล KNN พร้อมทำงานเต็มประสิทธิภาพ
+            </div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 16px; padding: 12px 20px; backdrop-filter: blur(8px); text-align: right;">
+            <div style="font-size: 0.82rem; color: #bae6fd; font-weight: 500;">💻 โครงงานสาขา IT</div>
+            <div style="font-size: 1.15rem; color: #ffffff; font-weight: 700;">Information Technology</div>
+            <div style="font-size: 0.85rem; color: #f1f5f9; margin-top: 2px;">รหัสนักศึกษา <b>674230036</b></div>
+        </div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -449,6 +479,34 @@ st.markdown("""
 # หน้าที่ 1: 📊 ภาพรวมและสถิติข้อมูล (Clinical Dashboard & EDA)
 # ==============================================================================
 if menu == "📊 ภาพรวมและสถิติข้อมูล":
+    # กล่องข้อมูลผู้จัดทำและสาขาวิชา Information Technology
+    st.markdown('<div class="section-header">👨‍💻 ข้อมูลผู้จัดทำโครงงาน (Information Technology)</div>', unsafe_allow_html=True)
+    dev_col1, dev_col2 = st.columns([1, 4])
+    with dev_col1:
+        if PROFILE_IMG.exists():
+            st.image(str(PROFILE_IMG), width=150, caption="ผู้จัดทำโครงงาน")
+    with dev_col2:
+        st.markdown("""
+        <div style="background: white; border-radius: 16px; border: 1px solid #e2e8f0; padding: 18px 24px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);">
+            <div style="display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 12px; border-radius: 12px; font-size: 0.82rem; font-weight: 600; margin-bottom: 6px;">
+                💻 สาขาวิชาเทคโนโลยีสารสนเทศ (Information Technology)
+            </div>
+            <h3 style="margin: 0 0 6px 0; color: #0f2b48; font-size: 1.3rem; font-weight: 700;">
+                โครงงานระบบจำแนกความเสี่ยงโรคหัวใจด้วย Machine Learning (KNN)
+            </h3>
+            <p style="margin: 0 0 10px 0; color: #64748b; font-size: 0.92rem;">
+                พัฒนาขึ้นเพื่อนำเทคโนโลยีสารสนเทศและปัญญาประดิษฐ์มาประยุกต์ใช้ในการคัดกรองและวิเคราะห์สุขภาพระดับคลินิก
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 0.9rem; color: #334155;">
+                <div><b>🆔 รหัสนักศึกษา:</b> 674230036</div>
+                <div><b>💻 สาขาวิชา:</b> เทคโนโลยีสารสนเทศ (Information Technology)</div>
+                <div><b>🏫 มหาวิทยาลัย:</b> มหาวิทยาลัยราชภัฏนครปฐม (NPRU)</div>
+                <div><b>🫀 โมเดล:</b> K-Nearest Neighbors (KNN Classifier)</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
     st.markdown('<div class="section-header">📈 ตัวชี้วัดสำคัญของชุดข้อมูลสุขภาพหัวใจ</div>', unsafe_allow_html=True)
     
     total_records = len(active_df)
